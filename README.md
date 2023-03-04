@@ -14,7 +14,7 @@ If you're a student reading this, remember:
 
 
 (The board looks absolutely disgusting, see if you can make a fancier one.)
-
+```
 [[' ' '1' '2' '3']
  ['A' 'X' 'X' '-']
  ['B' '-' '-' '-']
@@ -48,3 +48,4 @@ Player X: c3
  ['B' '-' 'X' '-']
  ['C' 'O' 'O' 'X']]
 -- Player X wins! --
+```
