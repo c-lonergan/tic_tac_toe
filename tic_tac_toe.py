@@ -38,6 +38,39 @@ class game:
             '1':0,'2':1,'3':2  # columns
         }
         
+    def play(self):
+        """
+        This is the main function and describes the basic logic of the game.
+        Loops through each player, and each time:
+            1. Checks for a draw
+            2. Asks for player move
+            3. Checks for a win.
+        """
+        
+        self.display_board()
+        
+        # this is just a list that alternates between X and O 9 times
+        # [X,O,X,O,...]
+        player_turns = np.empty((9,))
+        player_turns[::2] = 1
+        player_turns[1::2] = 4
+        
+        while self.game_over == False:
+            
+            for player in player_turns:
+
+                self.check_draw()
+                if self.game_over == True:
+                    break
+
+                self.player_move(player)
+                self.display_board()
+
+                for x in self.checklist():
+                    self.check_win_per_line(player,x)
+                if self.game_over == True:
+                    break
+        
     def checklist(self):
         """
         Returns a list of each row and column, as well as the diagonals.
@@ -46,12 +79,13 @@ class game:
         
         # empty list to add, or append, the rows/cols/diags to
         checklist = []
-        # rows
+        
         for i in range(3):
+            # rows
             checklist.append(self.board[i,:])
-        # columns
-        for j in range(3):
-            checklist.append(self.board[:,j])
+            # columns
+            checklist.append(self.board[:,i])
+            
         # diagonals
         checklist.append(np.diag(self.board))
         checklist.append(np.diag(np.flip(self.board,axis=1)))
@@ -117,38 +151,6 @@ class game:
         except:
             print(f"Please input co-ordinates correctly, player {player_str}")
             self.player_move(player)
-    
-    def play(self):
-        """
-        Loops through each player, and each time:
-            1. Checks for a draw
-            2. Asks for player move
-            3. Checks for a win.
-        """
-        
-        self.display_board()
-        
-        # this is just a list that alternates between X and O 9 times
-        # [X,O,X,O,...]
-        player_turns = np.empty((9,))
-        player_turns[::2] = 1
-        player_turns[1::2] = 4
-        
-        while self.game_over == False:
-            
-            for player in player_turns:
-
-                self.check_draw()
-                if self.game_over == True:
-                    break
-
-                self.player_move(player)
-                self.display_board()
-
-                for x in self.checklist():
-                    self.check_win_per_line(player,x)
-                if self.game_over == True:
-                    break
                      
     def display_board(self):
         """
