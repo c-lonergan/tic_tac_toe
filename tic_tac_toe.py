@@ -1,13 +1,19 @@
+# Example tic_tac_toe game for Code Camp class of 2023 at LMAX.
+# Makes use of functions, loops, arrays, and a light introduction to object-oriented programming.
+
+
+# we'll be using numpy as it has some handy functions that work well with arrays/matrices
 import numpy as np
 
+# the game class contains all the functions we'll need to run the game
 class game:
     
     def __init__(self):
         
         """
         - This section sets all the important settings and variables for the game to run.
-        - It *initialises* the class, so to speak.
-        - (Don't worry too much about this part, I don't really understand it either).
+        - It *initialises* or instantiates the class, so to speak.
+        - (Don't worry too much about this part).
         
         - The reason we do this is because we're going to use functions over and over, 
             and we want to track the important objects like the board or whether the game is over,
@@ -115,9 +121,9 @@ class game:
     def play(self):
         """
         Loops through each player, and each time:
-        1. Checks for a draw
-        2. Asks for player move
-        3. Checks for a win.
+            1. Checks for a draw
+            2. Asks for player move
+            3. Checks for a win.
         """
         
         self.display_board()
@@ -155,8 +161,7 @@ class game:
         display_board[0,:]=[' ','1','2','3']
         display_board[1:,0] = ['A','B','C']
         # update with actual board
-        # slightly complicated 
-        #     - basically we're converting from 1,4 to X,O using the player dictionary
+        #     - basically we're converting the board from 1,4 to X,O using the player dictionary
         #     - google 'map numpy entries to dictionary values'
         display_board[1:,1:] = np.vectorize(
             self.player_dict.get
